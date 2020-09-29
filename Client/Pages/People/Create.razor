@@ -1,0 +1,17 @@
+@page "/people/create"
+@inject HttpClient http
+@inject NavigationManager uriHelper
+
+<h3>Create</h3>
+
+<PersonForm ButtonText="Create Person" person="@person" onValidSubmit="@CreatePerson" />
+
+@code {
+    Person person = new Person();
+
+    async Task CreatePerson() {
+        await http.PostAsJsonAsync("api/people", person);
+        uriHelper.NavigateTo("people");
+    }
+}
+
